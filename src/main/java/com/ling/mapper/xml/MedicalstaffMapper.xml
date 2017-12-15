@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ling.mapper.MedicalstaffMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		medicalStaffID, academicID, `name`, sex, nationality, birth, birthdate, toWorkTime, idcard, phone, graduateSchool, professional, effectiveNot
+	</sql>
+	<!-- 查询全部-->
+	<select id="selectAll" resultType="com.ling.entity.Medicalstaff">
+		SELECT medicalstaff.*,academic.academicName FROM medicalstaff 
+		INNER JOIN academic ON medicalstaff.academicID= academic.academicID
+		where medicalstaff.effectiveNot=1
+	</select>
+	<!-- 条件查询-->
+	<select id="select" resultType="com.ling.entity.Medicalstaff" parameterType="java.lang.String">
+		SELECT medicalstaff.*,academic.academicName FROM medicalstaff 
+		INNER JOIN academic ON medicalstaff.academicID= academic.academicID
+		where medicalstaff.effectiveNot=1
+		<if test="name !=null and name !='' ">
+			and medicalstaff.name like concat('%',  #{name,jdbcType=VARCHAR}, '%')
+		</if>
+	</select>
+	<!-- 学位学历-->
+	<select id="academic" resultType="com.ling.entity.Medicalstaff">
+			SELECT * FROM academic 		
+	</select>
+	<!-- 修改值的回填-->
+	<select id="selectById" resultType="com.ling.entity.Medicalstaff" parameterType="java.lang.Integer">
+		SELECT medicalstaff.* FROM medicalstaff 
+		where medicalstaff.medicalStaffID=#{medicalStaffID,jdbcType=INTEGER} 
+	</select>
+</mapper>

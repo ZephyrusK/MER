@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ling.mapper.DiseaserecordMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		diseaseRecordID, doctorID, patientID, courseTypeID, superiorDoctorID, recordTime, diseaseContent, effectiveNot
+	</sql>
+	
+	<!-- 病程类型-->
+	<select id="courseType" resultType="com.ling.entity.Coursetype">
+			SELECT * FROM coursetype 		
+	</select>
+	
+	<!-- 查询病人的病程全部时间-->
+	<select id="recordTime" resultType="com.ling.entity.Diseaserecord"  parameterType="java.lang.Integer">
+			SELECT * FROM  	diseaserecord			
+			where effectiveNot = 1	and patientID = #{patientID,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectYear" resultType="com.ling.util.PageData" parameterType="java.lang.Integer">
+		select	DISTINCT year(recordTime) as riqi FROM diseaserecord  
+		where patientID = #{patientID,jdbcType=INTEGER}  order by year(recordTime) 
+	</select>
+	<select id="selectMonth" resultType="com.ling.util.PageData">
+		select	DISTINCT month(recordTime) as riqi FROM diseaserecord 
+		where recordTime like concat('%',  #{year}, '%') and patientID = #{patientID,jdbcType=INTEGER}
+		order by month(recordTime)
+	</select>
+	<select id="selectDay" resultType="com.ling.util.PageData">
+		SELECT	DISTINCT DAY(recordTime) as riqi FROM diseaserecord 
+		WHERE recordTime like concat('%',  #{yearmonth}, '%') and patientID = #{patientID,jdbcType=INTEGER}
+		order by DAY(recordTime)
+	</select>
+	
+	<select id="diseaseContent" resultType="com.ling.entity.Diseaserecord">
+		SELECT	 * FROM diseaserecord WHERE recordTime LIKE CONCAT('%',  #{recordTime}, '%')
+			and patientID = #{patientID,jdbcType=INTEGER}
+	</select>
+	<select id="Diagnosis" resultType="com.ling.entity.Diagnosis">
+		SELECT	 * FROM diagnosis WHERE diagnosisTime LIKE CONCAT('%',  #{diagnosisTime}, '%')
+			and patientID = #{patientID,jdbcType=INTEGER}
+	</select>
+</mapper>

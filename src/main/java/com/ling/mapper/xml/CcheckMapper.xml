@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ling.mapper.CcheckMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		checkID, checkDepartmentID, checkItemID, doctorID, patientID, checkList, applyTime,
+		clinicalDiagnosis, briefHistory, doctoNote, checkSee, checkConclusion, reportTime, urgent, effectiveNot
+	</sql>
+	
+	<!-- 检查室-->
+	<select id="checkDepartment" resultType="com.ling.entity.Checkdepartment">
+		SELECT * FROM checkdepartment 
+	</select>
+	
+	<!-- 检查项目-->
+	<select id="checkItem" resultType="com.ling.entity.Checkitem" parameterType="java.lang.Integer">
+		SELECT * FROM checkitem
+		where effectiveNot=1 and checkDepartmentID=#{checkDepartmentID,jdbcType=INTEGER} 
+	</select>
+	
+	<!--To检验单和 查询检验单  -->
+	<select id="selectCheck" resultType="com.ling.entity.Ccheck">
+		SELECT ccheck.*,doctor.name AS doctorName,basicdata.name AS patientName,
+			   checkDepartment.checkDepartmentName,checkitem.checkItemName FROM  ccheck  
+				INNER JOIN doctor ON ccheck.doctorID=doctor.doctorID  
+				INNER JOIN patient ON ccheck.patientID=patient.patientID
+				INNER JOIN basicdata ON basicdata.basicID=patient.basicID
+				INNER JOIN checkDepartment ON ccheck.checkDepartmentID=checkDepartment.checkDepartmentID
+				INNER JOIN checkitem ON ccheck.checkItemID=checkitem.checkItemID	
+				WHERE ccheck.effectiveNot=1 AND ccheck.reportTime IS null	
+			<if test="name !=null and name !=''">
+				and basicdata.name like concat('%',  #{name,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="applyTime !=null and applyTime !=''">
+				and ccheck.applyTime = #{applyTime,jdbcType=VARCHAR}
+			</if>
+	</select>
+	
+	<!-- 检查项目-->
+	<select id="ccheck" resultType="com.ling.entity.Ccheck" parameterType="java.lang.Integer">
+		SELECT ccheck.*,doctor.name AS doctorName,basicdata.name AS patientName,
+			   checkDepartment.checkDepartmentName,checkitem.checkItemName FROM  ccheck  
+				INNER JOIN doctor ON ccheck.doctorID=doctor.doctorID  
+				INNER JOIN patient ON ccheck.patientID=patient.patientID
+				INNER JOIN basicdata ON basicdata.basicID=patient.basicID
+				INNER JOIN checkDepartment ON ccheck.checkDepartmentID=checkDepartment.checkDepartmentID
+				INNER JOIN checkitem ON ccheck.checkItemID=checkitem.checkItemID	
+				WHERE ccheck.effectiveNot=1 and checkID=#{checkID,jdbcType=INTEGER} 
+	</select>
+</mapper>

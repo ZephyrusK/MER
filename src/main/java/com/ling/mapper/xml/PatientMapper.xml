@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ling.mapper.PatientMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		patientID, basicID, contactID, workID, otherID, effectiveNot
+	</sql>
+	<!-- 查询全部-->
+	<select id="selectAll" resultType="com.ling.entity.Patient">
+		SELECT patient.patientID, basicdata.* FROM patient
+		INNER JOIN basicdata ON patient.basicID=basicdata.basicID
+		where patient.effectiveNot=1
+	</select>
+	<!-- 根据name条件查询-->
+	<select id="select" resultType="com.ling.entity.Patient" parameterType="java.lang.String">
+		SELECT patient.patientID, basicdata.* FROM patient
+		INNER JOIN basicdata ON patient.basicID=basicdata.basicID
+		where patient.effectiveNot=1
+		<if test="name !=null and name !='' ">
+			and basicdata.name like concat('%',  #{name,jdbcType=VARCHAR}, '%')
+		</if>
+	</select>
+	<!-- 根据病人ID查询某病人详细-->
+	<select id="detaile" resultType="com.ling.entity.Patient" parameterType="java.lang.Integer">
+		SELECT patient.patientID, basicdata.*,contactmode.*,workdata.*,otherdata.* FROM patient
+		INNER JOIN basicdata ON patient.basicID=basicdata.basicID
+		INNER JOIN contactmode ON patient.contactID=contactmode.contactID
+		INNER JOIN workdata ON patient.workID=workdata.workID
+		INNER JOIN otherdata ON patient.otherID=otherdata.otherID
+		WHERE patient.effectiveNot=1
+		<if test="patientID !=0 and patientID !=null ">
+			and patient.patientID=#{patientID,jdbcType=INTEGER}
+		</if>
+	</select>
+	<!-- 计费类型-->
+	<select id="chargetype" resultType="com.ling.entity.Otherdata">
+		 SELECT * FROM  chargetype 
+	</select>
+</mapper>

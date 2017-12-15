@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ling.mapper.AllergicMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		allergicID, allergicTypeID, patientID, doctorID, allergicDescribe, effectiveNot
+	</sql>
+	
+	<!-- 过敏类型-->
+	<select id="allergicType" resultType="com.ling.entity.Allergictype">
+		 SELECT * FROM  allergictype 
+	</select>
+	
+	<!-- 过敏-->
+	<select id="allergic" resultType="com.ling.entity.Allergic" parameterType="java.lang.Integer">
+		 SELECT * FROM allergic	INNER JOIN allergictype ON 
+				 allergic.allergicTypeID=allergictype.allergicTypeID  
+		 WHERE allergic.patientID=#{patientID,jdbcType=INTEGER} ORDER  BY('allergicID')
+	</select>
+</mapper>

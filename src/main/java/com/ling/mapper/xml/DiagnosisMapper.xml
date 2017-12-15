@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ling.mapper.DiagnosisMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		diagnosisID, diagnosisTypeID, diagnosisNameID, doctorID, patientID, diagnosisTime, effectiveNot
+	</sql>
+	
+	<!-- 诊断名 -->
+	<select id="diagnosisname" resultType="com.ling.entity.Diagnosisname">
+		 SELECT * FROM  diagnosisname 
+	</select>
+	
+	<!-- 诊断类型 -->
+	<select id="diagnosistype" resultType="com.ling.entity.Diagnosistype">
+		 SELECT * FROM  diagnosistype 
+	</select>
+	
+	<!-- 查询诊断类型的ICD码 -->
+	<select id="icdCode" resultType="com.ling.entity.Diagnosisname" parameterType="java.lang.Integer">
+		 SELECT icdCode FROM diagnosisname WHERE diagnosisNameID = #{diagnosisNameID,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 医嘱类别 -->
+	<select id="adviceCategory" resultType="com.ling.entity.Advicecategory">
+		 SELECT * FROM adviceCategory
+	</select>
+	
+	<!-- 药物_西药 -->
+	<select id="drug_Xi" resultType="com.ling.entity.Drug">
+		 SELECT * FROM drug where adviceTypeID=1
+	</select>
+	
+	<!-- 药物_中药 -->
+	<select id="drug_Zhong" resultType="com.ling.entity.Drug">
+		 SELECT * FROM drug where adviceTypeID=2
+	</select>
+	
+	<!-- 频率 -->
+	<select id="frequency" resultType="com.ling.entity.Frequency">
+		 SELECT * FROM frequency
+	</select>
+	
+	<!-- 根据药物ID查询药物的属性 -->
+	<select id="byDrugID" resultType="com.ling.entity.Drug" parameterType="java.lang.Integer">
+		SELECT specificationName,wayName,unitName  FROM drug 
+		JOIN  specification ON drug.specificationID=specification.specificationID
+		JOIN way ON drug.wayID=way.wayID
+		JOIN unit on drug.unitID=unit.unitID
+		where drug.drugID = #{drugID,jdbcType=INTEGER}
+	</select>
+	
+</mapper>

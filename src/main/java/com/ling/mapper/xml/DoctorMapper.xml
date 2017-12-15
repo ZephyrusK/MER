@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ling.mapper.DoctorMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		doctorID, medicalStaffID, titleID, departmentID, treatmentGroupID, `name`, `password`, effectiveNot
+	</sql>
+	<!-- 查询全部-->
+	<select id="selectAll" resultType="com.ling.entity.Doctor">
+		SELECT d.name,d.doctorID,ti.titleName,de.departmentName,tr.groupName FROM doctor d
+			INNER JOIN title ti ON d.titleID=ti.titleID 
+			INNER JOIN department de ON d.departmentID=de.departmentID
+			INNER JOIN treatmentgroup tr ON d.treatmentGroupID=tr.treatmentGroupID
+			where d.effectiveNot=1	
+	</select>
+	<!-- 条件查询-->
+	<select id="select" resultType="com.ling.entity.Doctor" parameterType="java.lang.Integer">
+		SELECT d.name,d.doctorID,ti.titleName,de.departmentName,tr.groupName FROM doctor d
+			INNER JOIN title ti ON d.titleID=ti.titleID 
+			INNER JOIN department de ON d.departmentID=de.departmentID
+			INNER JOIN treatmentgroup tr ON d.treatmentGroupID=tr.treatmentGroupID			
+			where d.effectiveNot=1			
+			<if test="titleID !=null and titleID != 0">
+				and d.titleID = #{titleID,jdbcType=INTEGER}
+			</if>
+			<if test="departmentID !=null and departmentID !=0">
+				and d.departmentID = #{departmentID,jdbcType=INTEGER}
+			</if>
+	</select>
+	<!-- 职称 -->
+	<select id="title" resultType="com.ling.entity.Doctor">
+			SELECT * FROM title 		
+	</select>
+	<!-- 科室 -->
+	<select id="department" resultType="com.ling.entity.Doctor">
+			SELECT * FROM department 		
+	</select>
+	<!-- 诊疗组-->
+	<select id="treatmentGroup" resultType="com.ling.entity.Doctor">
+			SELECT * FROM treatmentgroup 		
+	</select>
+	<!-- 姓名 -->
+	<select id="medicalStaff" resultType="com.ling.entity.Doctor">
+			SELECT medicalStaffID, name FROM medicalStaff 		
+	</select>
+	<!-- 修改值的回填-->
+	<select id="selectById" resultType="com.ling.entity.Doctor" parameterType="java.lang.Integer">
+		SELECT doctor.* FROM doctor 
+		where doctor.doctorID=#{doctorID,jdbcType=INTEGER} 
+	</select>
+	<!-- 选择%%%%%%%%%病人的信息-->
+	<select id="choice" resultType="com.ling.entity.Patient">
+		SELECT patientID,NAME,sex,blood,origin,nation,birthdate FROM patient 
+		INNER JOIN	basicdata ON patient.basicID=basicdata.basicID
+		WHERE patient.effectiveNot=1
+	</select>
+	<!-- 选择病人的信息-->
+	<select id="choice_select" resultType="com.ling.entity.Patient" parameterType="java.lang.String">
+		SELECT patientID,NAME,sex,blood,origin,nation,birthdate FROM patient 
+		INNER JOIN	basicdata ON patient.basicID=basicdata.basicID
+		WHERE patient.effectiveNot=1
+		<if test="name !=null and name !=''">
+				and basicdata.name like concat('%',  #{name,jdbcType=VARCHAR}, '%')
+		</if>
+	</select>	
+</mapper>

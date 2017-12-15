@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ling.mapper.TestMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		testID, doctorID, patientID, sampleID, applyTime, 
+		testName, remark, reportTime, urgent, effectiveNot
+	</sql>
+		
+	<!-- 样本 -->
+	<select id="sample" resultType="com.ling.entity.Sample">
+		 SELECT * FROM  sample 
+	</select>
+	<!-- 检验项目 -->
+	<select id="testitem" resultType="com.ling.entity.Testitem">
+		 SELECT * FROM  testitem 
+	</select>
+	<!-- 检验项目ID   查询检验项目某属性  -->
+	<select id="byTestItemID" resultType="com.ling.entity.Testitem" parameterType="java.lang.Integer">
+		 SELECT * FROM  testitem where  testItemID = #{testItemID,jdbcType=INTEGER}
+	</select>	
+	<!--To检验单和 查询检验单  -->
+	<select id="selectTest" resultType="com.ling.entity.Test">
+		 SELECT test.*,doctor.name AS doctorName,basicdata.name AS patientName,sample.sampleName FROM  test  
+			INNER JOIN doctor ON test.doctorID=doctor.doctorID  
+			INNER JOIN patient ON test.patientID=patient.patientID
+			INNER JOIN basicdata ON basicdata.basicID=patient.basicID
+			INNER JOIN sample ON test.sampleID=sample.sampleID		
+			where test.effectiveNot=1 and test.reportTime is null		
+			<if test="name !=null and name !=''">
+				and basicdata.name like concat('%',  #{name,jdbcType=VARCHAR}, '%')
+			</if>
+			<if test="applyTime !=null and applyTime !=''">
+				and test.applyTime = #{applyTime,jdbcType=VARCHAR}
+			</if>
+	</select>
+	<!-- 检验单  -->
+	<select id="test" resultType="com.ling.entity.Test" parameterType="java.lang.Integer">
+		select test.*, sample.sampleName FROM test 
+			INNER JOIN sample on test.sampleID=sample.sampleID
+			where test.effectiveNot=1  and test.testID=#{testID,jdbcType=INTEGER}
+	</select>
+	<!-- 检验单明细  -->
+	<select id="testdetail" resultType="com.ling.entity.Testdetail" parameterType="java.lang.Integer">
+		SELECT testitem.testItemName,testitem.unit,testitem.rrs,testdetail.testDetailID,testdetail.remark FROM testdetail 
+			INNER JOIN testitem ON testdetail.testItemID=testitem.testItemID
+			where testdetail.testID= #{testID,jdbcType=INTEGER}
+	</select>
+	
+	<select id="testTree"  resultType="com.ling.tree.Tree" parameterType="java.lang.Integer">
+		SELECT testID as id, '0' AS pId, YEAR(applyTime) as name FROM test WHERE patientID=#{patientID,jdbcType=INTEGER} GROUP BY YEAR(applyTime) UNION
+		SELECT r.testID + (SELECT MAX(testID) FROM test) as id, (SELECT q.testID FROM test q WHERE YEAR(q.applyTime) = YEAR(r.applyTime) GROUP BY YEAR(q.applyTime)) AS pId, MONTH(r.applyTime) as name
+		FROM test r WHERE r.patientID=#{patientID,jdbcType=INTEGER} GROUP BY MONTH(r.applyTime),YEAR(r.applyTime) UNION
+		SELECT r.testID + (SELECT MAX(testID) FROM test) + (SELECT MAX(testID) FROM test) as id, (SELECT q.testID  + (SELECT MAX(testID) FROM test) FROM test q WHERE MONTH(q.applyTime) = MONTH(r.applyTime) AND YEAR(q.applyTime) = YEAR(r.applyTime) GROUP BY MONTH(q.applyTime)) AS pId, DAY(r.applyTime) as name
+		FROM test r WHERE r.patientID=#{patientID,jdbcType=INTEGER} GROUP BY DAY(r.applyTime),MONTH(r.applyTime),YEAR(r.applyTime)
+	</select>
+</mapper>
