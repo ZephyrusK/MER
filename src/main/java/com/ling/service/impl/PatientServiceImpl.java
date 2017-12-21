@@ -36,7 +36,8 @@ public class PatientServiceImpl extends SuperServiceImpl<PatientMapper, Patient>
 	}
 
 	@Override
-	public Patient detaile(int patientID) {		
+	public Patient detaile(int patientID) {
+
 		return patientDao.detaile(patientID);
 	}
 

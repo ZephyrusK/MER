@@ -91,6 +91,8 @@
 									<c:if test="${item.culture==4}">研究生</c:if>
 									<c:if test="${item.culture==5}">研究生</c:if>
 									<c:if test="${item.culture==6}">博士</c:if>
+									<c:if test="${item.culture==7}">初中</c:if>
+									<c:if test="${item.culture==8}">小学</c:if>
 								</td>
 								<td>
 									<c:if test="${item.marital==1}">未婚</c:if>

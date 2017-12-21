@@ -60,8 +60,7 @@
 			<div class="am-g" style="margin: 10px 0px 0px 0px;">					  
 				<label class="am-u-sm-2 am-form-label">检查项目：</label>
                 <div class="am-u-sm-10">
-                   <select name="checkItemID" id="checkItemID">
-					</select>
+                   <input style="float: right;"type="text" name="checkList"/>
                 </div>
 			</div>
 			<div class="am-g" style="margin: 10px 0px 0px 0px;">

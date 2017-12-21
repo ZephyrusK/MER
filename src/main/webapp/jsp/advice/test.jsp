@@ -82,6 +82,19 @@
 							<th>备注</th>
 							<th>加急否</th>
 						</tr>
+						<tr>
+							<td><input type="Checkbox" id="Choose_one" name="Choose-name"/></td>
+							<td><input type='text' class="PatientName" name="PatientName"/></td>
+							<td><input type='text' class="CheckName" name="CheckName"/></td>
+							<td><input type='text' class="Example" name="Example"/></td>
+							
+							<td><input type="text" id="applyTime" name="applyTime" class="tpl-form-no-bg tpl-form-input" 						
+						style="width:100%;float:left;margin-right:10px;" data-am-datepicker readonly></td>	
+						
+							<td><input type='text' class="Remark" name="Remark"/></td>								
+							<td><input type="radio" name="urgent" value="1"> <label class="am-form-label">加急</label>
+			        <input type="radio" name="urgent" value="2"> <label class="am-form-label">明晨</label>  </td>
+						</tr>
 						<c:forEach items="${test}" var="item">
 							<tr>
 								<td><input type="radio" name="radio"/></td>

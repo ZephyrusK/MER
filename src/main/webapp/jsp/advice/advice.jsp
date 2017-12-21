@@ -138,8 +138,7 @@
 </script>
 <div style="padding-left:10px;">
 	<div class="widget am-cf">
-		<div class="widget-head am-cf">
-			<div class="widget-title am-fl">医嘱编辑：</div>
+		<div class="widget-head am-cf">？：</div>
 		</div>
 		<div class="am-tabs" data-am-tabs>
 			<ul class="am-tabs-nav am-nav am-nav-tabs">

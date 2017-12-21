@@ -39,15 +39,15 @@
 			</div>
         	<div class="bj_right">
             	<p>使用以下账号直接登录</p>
-                <a href="#" class="zhuce_qq">手机登陆</a>
-                <a href="#" class="zhuce_wx">微信登陆</a>
-                <p>没有账号？<a href="../index/index.html">立即注册</a></p>  
+                <a href="#" class="zhuce_qq">QQ登陆</a>
+                <a href="#" class="zhuce_sj">手机登陆</a> 
+                <p>没有账号？<a href="#">立即注册</a></p>  
             </div>
         </div>
        
     </div>
 
 </div>
-</div>   
+  
 </body>
 </html>

@@ -73,7 +73,7 @@
 							data-am-modal="{target: '#insert', closeViaDimmer: 0,dimmer:0, width: 500, height: 300}">新增</button>
 						<button type="button" class="am-btn am-btn-primary am-radius" onclick="toUpdate()"
 							data-am-modal="{target: '#update', closeViaDimmer: 0,dimmer:0, width: 500, height: 300}">修改</button>
-						<button type="button" class="am-btn am-btn-primary am-radius">删除</button>
+						<button type="button" class="am-btn am-btn-primary am-radius" >删除</button>
 					</div>
 				</div>
 			</form>
