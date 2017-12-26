@@ -19,7 +19,7 @@ public class DoctorController {
 //	@RequestMapping(value="medicalstaff_updateById", produces="application/json;charset=UTF-8")
 	
 	@RequestMapping("doctor")
-	public ModelAndView doctor(){//       系统管理---用户维护-----进入加载数据		
+	public ModelAndView doctor(){//信息维护---病人信息维护-----进入加载数据		
 		ModelAndView mv=new ModelAndView("/system/doctor");
 		mv.addObject("doctor", iDoctorService.selectAll());
 		mv.addObject("title", iDoctorService.title());
@@ -28,7 +28,7 @@ public class DoctorController {
 	}	
 	
 	@RequestMapping("select")
-	public ModelAndView select(int titleID,int departmentID){//   系统管理---用户维护-----查询
+	public ModelAndView select(int titleID,int departmentID){//信息维护---病人信息维护-----查询
 		ModelAndView mv=new ModelAndView("/system/doctor");		
 		mv.addObject("doctor", iDoctorService.select(titleID,departmentID));
 		mv.addObject("title", iDoctorService.title());
@@ -39,7 +39,7 @@ public class DoctorController {
 	}
 	
 	@RequestMapping("toaddupdate")
-	public ModelAndView toAdd_Update(int doctorID){//   系统管理---医务人员-----To新增修改页面		
+	public ModelAndView toAdd_Update(int doctorID){//信息维护---病人信息维护-----新增修改页面		
 		ModelAndView mv=new ModelAndView("/system/doctor_in_up");
 		mv.addObject("title", iDoctorService.title());
 		mv.addObject("department", iDoctorService.department());
@@ -55,14 +55,14 @@ public class DoctorController {
 	}
 	
 	@RequestMapping("insertOrUpdate")
-	public ModelAndView insert(Doctor vo){//   系统管理---医务人员-----新增-----修改
+	public ModelAndView insert(Doctor vo){//信息维护---病人信息维护-----新增或修改
 		iDoctorService.insertOrUpdateSelective(vo);
 		ModelAndView mv=doctor();
 		return mv;	
 	}
 	
 	@RequestMapping("delete")
-	public ModelAndView delete(Doctor doctor){//   系统管理---医务人员-----删除	
+	public ModelAndView delete(Doctor doctor){//信息维护---病人信息维护-----删除	
 		doctor.setEffectiveNot(0);		
 		iDoctorService.updateSelectiveById(doctor);
 		ModelAndView mv=doctor();

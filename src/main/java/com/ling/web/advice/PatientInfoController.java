@@ -30,35 +30,29 @@ public class PatientInfoController {		//病人信息
 	private IDiseaserecordService iDiseaserecordService;//病程记录
 	
 	
-	@RequestMapping("advice_base")
-	public ModelAndView advice_base(HttpSession httpSession){//	  病历---	To基础信息
-		ModelAndView mv=new ModelAndView("/advice/base");
+	@RequestMapping("patientmedical_base")
+	public ModelAndView patientmedical_base(HttpSession httpSession){//	  病人信息---基础信息 + 留院观察---入院资料---基础信息
+		ModelAndView mv=new ModelAndView("/patientmedical/base");
 		if((Integer) httpSession.getAttribute("patientID")>0){
 			int patientID=(Integer) httpSession.getAttribute("patientID");
 			mv.addObject("detaile", iPatientService.detaile(patientID));
 		}		
 		return mv;		
 	}
-	@RequestMapping("advice_health")
-	public ModelAndView advice_health(HttpSession httpSession){//	  病历---to健康报告
-		ModelAndView mv=new ModelAndView("/advice/health");
-		if((Integer) httpSession.getAttribute("patientID")>0){
-			int patientID=(Integer) httpSession.getAttribute("patientID");
-			mv.addObject("detaile", iPatientService.detaile(patientID));
-		}		
-		return mv;		
-	}
-	@RequestMapping("advice_allergy")
-	public ModelAndView advice_allergy(HttpSession session){//	  病历---	To过敏信息
-		ModelAndView mv =new ModelAndView("/advice/allergy");
+	
+	@RequestMapping("patientmedical_allergy")
+	public ModelAndView patientmedical_allergy(HttpSession session){//	  病人信息---过敏信息
+		ModelAndView mv =new ModelAndView("/patientmedical/allergy");
 		mv.addObject("allergic", iAllergicService.allergic((Integer)session.getAttribute("patientID")));
 		mv.addObject("allergicType", iAllergicService.allergicType());
 		return mv;
 	}
 	
-	@RequestMapping("allergyInsert")
-	public ModelAndView allergyInsert(Allergic vo,HttpSession session){//		过敏新增和修改
-		ModelAndView mv =new ModelAndView("/advice/allergy");
+
+	
+	@RequestMapping("patientmedical_allergyInsert")
+	public ModelAndView patientmedical_allergyInsert(Allergic vo,HttpSession session){//过敏新增和修改
+		ModelAndView mv =new ModelAndView("/patientmedical/allergy");
 		vo.setDoctorID((Integer)session.getAttribute("doctorID"));
 		vo.setPatientID((Integer)session.getAttribute("patientID"));
 		vo.setEffectiveNot(1);
@@ -68,9 +62,21 @@ public class PatientInfoController {		//病人信息
 		return mv;
 	}
 	
-	@RequestMapping("advice_disease")
-	public ModelAndView advice_disease(HttpSession httpSession){// 病历---	病程记录 ----获取年 调整为年的大节点
-		ModelAndView mv=new ModelAndView("/advice/disease");
+	@RequestMapping("patientmedical_health")
+	public ModelAndView patientmedical_health(HttpSession httpSession){//病人信息---健康报告
+		ModelAndView mv=new ModelAndView("/patientmedical/health");
+		if((Integer) httpSession.getAttribute("patientID")>0){
+			int patientID=(Integer) httpSession.getAttribute("patientID");
+			mv.addObject("detaile", iPatientService.detaile(patientID));
+		}		
+		return mv;		
+	}
+	
+	
+	
+	@RequestMapping("patientmedical_disease")// 病人病历---病人信息---既往病历 + 留院观察---入院资料---既往病历
+	public ModelAndView patientmedical_disease(HttpSession httpSession){// 病人信息---既往病历 ----获取年 调整为年的大节点
+		ModelAndView mv=new ModelAndView("/patientmedical/disease");
 		
 		//获取年 调整为年的大节点
 		List<PageData> listpd = new ArrayList<PageData>();
@@ -116,9 +122,6 @@ public class PatientInfoController {		//病人信息
 		return listpd;
 	}
 	
-/*	@RequestMapping("diseaseContent")
-	public String diseaseContent(String recordTime,HttpSession session){
-		Diseaserecord disease=iDiseaserecordService.diseaseContent(recordTime, session.get)
-		return 
-	}*/
+	
+
 }

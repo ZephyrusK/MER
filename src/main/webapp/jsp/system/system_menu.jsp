@@ -16,12 +16,11 @@
 		});
 	});
 </script>
-<li class="sidebar-nav-link" onClick="Method('/system/**.do')"><a href="javascript:;" class="left-link">  
-	<span class="am-icon-angle-right sidebar-nav-link-logo"></span>科室维护 </a></li>
+
 <li class="sidebar-nav-link" onClick="Method('/doctor/doctor.do')"><a href="javascript:;" class="left-link"> 
-	<span class="am-icon-angle-right sidebar-nav-link-logo"></span>用户维护</a></li>
+	<span class="am-icon-angle-right sidebar-nav-link-logo"></span>医务人员快速查询</a></li>
 <li class="sidebar-nav-link" onClick="Method('/medicalstaff/medicalstaff.do')"><a href="javascript:;" class="left-link"> 
-	<span class="am-icon-angle-right sidebar-nav-link-logo"></span>医务人员维护</a></li>
+	<span class="am-icon-angle-right sidebar-nav-link-logo"></span>医务人员信息维护</a></li>
 <li class="sidebar-nav-link" onClick="Method('/patient/patient.do')"><a href="javascript:;" class="left-link">  
-	<span class="am-icon-angle-right sidebar-nav-link-logo"></span>病人维护 </a></li>
+	<span class="am-icon-angle-right sidebar-nav-link-logo"></span>病人信息维护 </a></li>
 

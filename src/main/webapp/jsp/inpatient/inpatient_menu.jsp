@@ -21,12 +21,12 @@
 		 <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
 	</a>
 	<ul class="sidebar-nav sidebar-nav-sub">
-		<li class="sidebar-nav-link"  onClick="Method('/main/advice_base.do')"><a href="javascript:;" class="left-link"> 
+		<li class="sidebar-nav-link"  onClick="Method('/patientInfo/patientmedical_base.do')"><a href="javascript:;" class="left-link"> 
 			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 基本信息 </a></li>
-		<li class="sidebar-nav-link"><a href="javascript:;"  class="left-link"> 
+		<li class="sidebar-nav-link"  onClick="Method('/patientInfo/**')"><a href="javascript:;"  class="left-link"> 
 			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	入院记录 </a></li>
-		<li class="sidebar-nav-link"><a href="javascript:;"  class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	表格病历 </a></li>
+		<li class="sidebar-nav-link"  onClick="Method('/patientInfo/patientmedical_disease.do')"><a href="javascript:;"  class="left-link"> 
+			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	既往病历 </a></li>
 	</ul>
 </li>
 <li class="sidebar-nav-link">
@@ -35,18 +35,14 @@
 		 <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
 	</a>
 	<ul class="sidebar-nav sidebar-nav-sub">
-		<li class="sidebar-nav-link" onClick="Method('/diagnosis/advice_advice.do')"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 医      嘱 </a></li>
-		<li class="sidebar-nav-link" onClick="Method('/main/advice_disease.do')"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	病程记录 </a></li>
-		<li class="sidebar-nav-link"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 检      验 </a></li>
-		<li class="sidebar-nav-link"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	检      查 </a></li>
-		<li class="sidebar-nav-link"onClick="Method('/main/advice_operation.do')"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 手术资料 </a></li>
-		<li class="sidebar-nav-link"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	会      诊 </a></li>
+		<li class="sidebar-nav-link" onClick="Method('/patientInfo/**')"><a href="javascript:;" class="left-link"> 
+			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 检查情况 </a></li>
+		<li class="sidebar-nav-link" onClick="Method('/patientInfo/**')"><a href="javascript:;" class="left-link"> 
+			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	会诊情况 </a></li>
+		<li class="sidebar-nav-link" onClick="Method('/patientInfo/**')"><a href="javascript:;" class="left-link"> 
+			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>手术情况记录</a></li>
+		<li class="sidebar-nav-link" onClick="Method('/patientInfo/**')"><a href="javascript:;" class="left-link"> 
+			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>住院记录 </a></li>
 	</ul>
 </li>
 <li class="sidebar-nav-link">
@@ -55,16 +51,13 @@
 		 <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
 	</a>
 	<ul class="sidebar-nav sidebar-nav-sub">
-		<li class="sidebar-nav-link"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 出院小结 </a></li>
-		<li class="sidebar-nav-link"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	死亡资料 </a></li>
-		<li class="sidebar-nav-link"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 24H入出院 </a></li>
-		<li class="sidebar-nav-link"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	24H死亡 </a></li>
-		<li class="sidebar-nav-link"><a href="javascript:;" class="left-link"> 
-			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 病案首页 </a></li>
+		<li class="sidebar-nav-link" onClick="Method('/patientInfo/**')"><a href="javascript:;" class="left-link"> 
+			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 出院检查 </a></li>
+		<li class="sidebar-nav-link" onClick="Method('/patientInfo/**')"><a href="javascript:;" class="left-link"> 
+			<span class="am-icon-angle-right sidebar-nav-link-logo"></span>	出院药房 </a></li>
+		<li class="sidebar-nav-link" onClick="Method('/patientInfo/**')"><a href="javascript:;" class="left-link"> 
+			<span class="am-icon-angle-right sidebar-nav-link-logo"></span> 出院记录 </a></li>
+		
 	</ul>
 </li>
 

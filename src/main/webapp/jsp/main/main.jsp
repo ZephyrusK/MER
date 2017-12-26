@@ -120,23 +120,20 @@
 				<%-- 其它功能 --%>
 				<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 					<ul	class="am-nav am-nav-pills am-topbar-nav am-topbar-right admin-header-list tpl-header-list">
-						<li class="top-menu"  onclick="openLeftMenu('/main/advice_menu.do');">
-							<a class="am-dropdown-toggle tpl-header-list-link"href="javascript:;" style="color:#969696">病历</a>
+						<li class="top-menu"  onclick="openLeftMenu('/main/patient_menu.do');">
+							<a class="am-dropdown-toggle tpl-header-list-link"href="javascript:;" style="color:#969696">病人病历</a>
 						</li>
 						<li class="top-menu" onclick="openLeftMenu('/main/inpatient_menu.do')">						
-							<a href="#" style="color:#969696">留观</a>
+							<a href="#" style="color:#969696">留院观察</a>
 						</li>
-						<li class="top-menu" onclick="openLeftMenu('/main/rescue_menu.do')">
-							<a href="javascript:;"style="color:#969696">抢救</a>
+						<li class="top-menu" onclick="openLeftMenu('/main/doctor_menu.do')">
+							<a href="javascript:;"style="color:#969696">医生信息</a>
 						</li>
-						<li class="top-menu" onclick="openLeftMenu('/main/maintenance_menu.do')">						
-							<a href="javascript:;"style="color:#969696">使用维护</a>
-						</li>
-						<li class="top-menu" onclick="openLeftMenu('/main/department_menu.do');">						
-							<a href="javascript:;" style="color:#969696">科室管理</a>
+						<li class="top-menu" onclick="openLeftMenu('/main/download_menu.do')">						
+							<a href="javascript:;"style="color:#969696">资料下载</a>
 						</li>
 						<li class="top-menu" onclick="openLeftMenu('/main/system_menu.do');">
-							<a href="javascript:;" style="color:#969696">系统管理</a>
+							<a href="javascript:;" style="color:#969696">信息维护</a>
 						</li>
 						<!-- 退出 -->
 						<li class="top-menu" class="am-text-sm">

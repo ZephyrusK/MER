@@ -36,93 +36,41 @@ public class ReportController {
 	private ICcheckService iCcheckService;
 	
 
-	@RequestMapping("advice_test")
-	public ModelAndView advice_test(){//	 To检验单
-		ModelAndView mv=new ModelAndView("/advice/test");
-		mv.addObject("test", iTestService.selectTest("", ""));
-		return mv;
-	}
 	
-	@RequestMapping("selectTest")
-	public ModelAndView selectTest(String name,String applyTime){//	  查询检验单
-		ModelAndView mv=new ModelAndView("/advice/test");
-		mv.addObject("test", iTestService.selectTest(name, applyTime));
-		return mv;
-	}
-	
-	@RequestMapping("toeditTest")
-	public ModelAndView toeditTest(int testID){//	 To编辑检验单
-		ModelAndView mv=new ModelAndView("/advice/test_edit");
-		mv.addObject("test", iTestService.test(testID));
-		mv.addObject("testdetail", iTestService.testdetail(testID));
-		return mv;
-	}
-	
-	@RequestMapping("SaveeditTest")
-	public ModelAndView SaveeditTest(int testID,Integer[] testDetailID,String[] result){//	  检验单的编辑提交
-		ModelAndView mv=new ModelAndView("/advice/test");
-		Test test =new Test();
-		test.setTestID(testID);
-		test.setReportTime(new Date());
-		iTestService.updateSelectiveById(test);
-		Testdetail testdetail = null;
-		List<Testdetail> listTestdetail=new ArrayList<Testdetail>();
-		for(int i=0;i<result.length;i++){			//修改检验明细的结果字段
-			testdetail = new Testdetail();			
-			testdetail.setTestDetailID(testDetailID[i]);
-			testdetail.setResult(result[i]);
-			listTestdetail.add(testdetail);
-		}
-		iTestdetailService.updateBatchById(listTestdetail);
-		mv.addObject("test", iTestService.selectTest("", ""));
-		return mv;
-	}
-	
-	@RequestMapping("cancel")
-	public ModelAndView cancel(int testID){//	  作废检验单
-		ModelAndView mv=new ModelAndView("/advice/test");
-		Test test =new Test();
-		test.setTestID(testID);
-		test.setEffectiveNot(0);
-		iTestService.updateSelectiveById(test);
-		mv.addObject("test", iTestService.selectTest("", ""));
-		return mv;
-	}
-	
-	@RequestMapping("advice_check")
-	public ModelAndView advice_check(){//	  病历---	To检查单
-		ModelAndView mv=new ModelAndView("/advice/check");
+	@RequestMapping("download_check")//资料下载---检查单
+	public ModelAndView download_check(){
+		ModelAndView mv=new ModelAndView("/download/check");
 		mv.addObject("check", iCcheckService.selectCheck("",""));
 		return mv;
 	}
 	
-	@RequestMapping("selectCheck")
-	public ModelAndView selectCheck(String name,String applyTime){//	  查询检查单
-		ModelAndView mv=new ModelAndView("/advice/check");
+	@RequestMapping("selectCheck")//资料下载---查询检查单
+	public ModelAndView selectCheck(String name,String applyTime){
+		ModelAndView mv=new ModelAndView("/download/check");
 		mv.addObject("check", iCcheckService.selectCheck(name, applyTime));
 		mv.addObject("patientName", name);
 		return mv;
 	}
 	
-	@RequestMapping("toeditCheck")
-	public ModelAndView toeditCheck(int checkID){//	 To编辑检查单
-		ModelAndView mv=new ModelAndView("/advice/check_edit");
+	@RequestMapping("toeditCheck")//资料下载---编辑检查单
+	public ModelAndView toeditCheck(int checkID){
+		ModelAndView mv=new ModelAndView("/download/check_edit");
 		mv.addObject("check", iCcheckService.ccheck(checkID));
 		return mv;
 	}
 	
-	@RequestMapping("SaveeditCheck")
-	public ModelAndView SaveeditCheck(Ccheck ccheck){//	  检查单的编辑提交
-		ModelAndView mv=new ModelAndView("/advice/check");
+	@RequestMapping("SaveeditCheck")//资料下载---检查单---检查单的编辑提交
+	public ModelAndView SaveeditCheck(Ccheck ccheck){	  
+		ModelAndView mv=new ModelAndView("/download/check");
 		ccheck.setReportTime(new Date());		
 		iCcheckService.updateSelectiveById(ccheck);		
 		mv.addObject("check", iCcheckService.selectCheck("",""));
 		return mv;
 	}
 	
-	@RequestMapping("cancleCheck")
-	public ModelAndView cancleCheck(int checkID){//	  作废检查单
-		ModelAndView mv=new ModelAndView("/advice/check");
+	@RequestMapping("cancleCheck")//资料下载---查询检查单---作废检查单
+	public ModelAndView cancleCheck(int checkID){	  
+		ModelAndView mv=new ModelAndView("/download/check");
 		Ccheck check =new Ccheck();
 		check.setCheckID(checkID);
 		check.setEffectiveNot(0);
@@ -132,9 +80,9 @@ public class ReportController {
 	}
 		
 	
-	@RequestMapping("advice_test_report")
-	public ModelAndView advice_test_report(){//	  病历---	To检验报告
-		ModelAndView mv=new ModelAndView("/advice/test_report");
+	@RequestMapping("download_check_report")//资料下载---检查报告
+	public ModelAndView download_check_report(){
+		ModelAndView mv=new ModelAndView("/download/check_report");
 		return mv;
 	}
 	
@@ -147,16 +95,37 @@ public class ReportController {
 		out.flush();
 	}
 	
-	@RequestMapping("test_reportSelect")
-	public String test_reportSelect(){//	  病历---	Select检验报告
+	@RequestMapping("check_report_uploading")//资料下载---上传检查报告
+	public String check_report_uploading(){	  
 		
 		
 		
-		return"/advice/test_report";
+		return"/download/check_report";
+	}
+	
+	@RequestMapping("check_report_downloading")//资料下载---下载检查报告
+	public String check_report_downloading(){	  
+		
+		
+		
+		return"/download/check_report";
+	}
+	
+	@RequestMapping("check_report_print")//资料下载---打印检查报告
+	public String check_report_print(){	  
+		
+		
+		
+		return"/download/check_report";
+	}
+	
+	@RequestMapping("check_report_onlinebrowsen")//资料下载---在线浏览检查报告
+	public String check_report_onlinebrowsen(){	  
+		
+		
+		
+		return"/download/check_report";
 	}
 
-	@RequestMapping("advice_check_report")
-	public String advice_check_report(){//	  病历---	检查报告
-		return"/advice/check_report";
-	}
+	
 }

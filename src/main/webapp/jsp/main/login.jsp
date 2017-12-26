@@ -21,7 +21,7 @@
 </head>
 <body class="login_bj" >
 <div class="zhuce_body">
-	<div class="logo"><a href="#"><img width="350" height="100" border="0"></a></div>
+<h1>电子病历系统</h1>
     <div class="zhuce_kong login_kuang">
     	<div class="zc">
         	<div class="bj_bai">
@@ -38,10 +38,12 @@
 			</form>
 			</div>
         	<div class="bj_right">
-            	<p>使用以下账号直接登录</p>
-                <a href="#" class="zhuce_qq">QQ登陆</a>
-                <a href="#" class="zhuce_sj">手机登陆</a> 
-                <p>没有账号？<a href="#">立即注册</a></p>  
+                <br><p class="denglushenfen">请选择您的登录身份</p>
+                <label><input id="radio1" type="radio" name="identify" style="position:absolute; top:115px; left:310px" value="医生" ></label>
+                <p class="yslogin">医生登录</p>
+                <label><input id="radio2" type="radio" name="identify" style="position:absolute; top:155px; left:310px" value="患者" ></label>
+                <p class="hzlogin">患者登录</p>
+                <br><p style="position:absolute; top:188px; left:300px; ">没有账号？<a href="#">立即注册</a></p>
             </div>
         </div>
        

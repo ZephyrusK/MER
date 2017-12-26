@@ -75,7 +75,11 @@
 							<td><input type="radio" name="doc-radio-1"></td>
 							<td style="display:none">${item.patientID}</td>
 							<td>${item.name}</td>
-							<td>${"1" == item.sex ? "男":"女"}</td>
+							<td>
+								<c:if test="${item.sex==1}">男</c:if>
+								<c:if test="${item.sex==0}">女</c:if>
+							
+							</td>
 							<td>
 								<c:if test="${item.blood==1}">A型</c:if>
 								<c:if test="${item.blood==2}">B型</c:if>

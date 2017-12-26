@@ -66,50 +66,32 @@ public class MainController {
 		return mv;
 	}
 	
-	@RequestMapping("advice_menu")
-	public String advice_menu(){//   病历---菜单jsp		
-		return "/advice/advice_menu";
+	@RequestMapping("patient_menu")
+	public String patient_menu(){//   病人病历---菜单jsp		
+		return "/patientmedical/patient_menu";
 	}
 	
 	@RequestMapping("inpatient_menu")
-	public String inpatient_menu(){//   留观---菜单jsp		
+	public String inpatient_menu(){//   留院观察---菜单jsp		
 		return"/inpatient/inpatient_menu";
 	}
 	
-	@RequestMapping("rescue_menu")
-	public String rescue_menu(){//   抢救---菜单jsp	
-		return"/rescue/rescue_menu";
+	@RequestMapping("doctor_menu")
+	public String doctor_menu(){//   医生信息---菜单jsp	
+		return"/doctor/doctor_menu";
 	}
 	
-	@RequestMapping("maintenance_menu")
-	public String maintenance_menu(){//   使用维护---菜单jsp	
-		return"/maintenance/maintenance_menu";
+	@RequestMapping("download_menu")
+	public String download_menu(){//   资料下载---菜单jsp	
+		return"/download/download_menu";
 	}
 	
-	@RequestMapping("department_menu")
-	public String department_menu(){//   科室管理---菜单jsp	
-		return"/department/department_menu";
-	}
 	
 	@RequestMapping("system_menu")
-	public String system_menu(){//   系统管理---菜单jsp	
+	public String system_menu(){//   信息维护---菜单jsp	
 		return"/system/system_menu";
 	}
-	@RequestMapping("advice_advice")
-	public String advice_advice(){
-		return"/advice/advice";
-	}
-	@RequestMapping("advice_base")
-	public String advice_base(){//留观-基本信息
-		return"/advice/base";
-	}
-	@RequestMapping("advice_disease")
-	public String advice_disease(){//留观-住院资料-病程记录
-		return"/advice/disease";
-	}
-	@RequestMapping("advice_operation")
-	public String advice_operation(){//留观-住院资料-手术资料
-		return"/advice/operation";
-	}
+	
+	
 	
 }

@@ -37,21 +37,21 @@ public class PatientController {
 	@Autowired 
 	private IOtherdataService iOtherdataService;
 	
-	@RequestMapping("patient")
+	@RequestMapping("patient")                //信息维护---病人信息维护 ---增加病人信息
 	public ModelAndView patient(){
 		ModelAndView mv=new ModelAndView("/system/patient");
 		mv.addObject("basicdata", iPatientService.selectAll());
 		return mv;
 	}
 	
-	@RequestMapping("select")
+	@RequestMapping("select")                  //信息维护---病人信息维护 ---选择病人
 	public ModelAndView select(String name){
 		ModelAndView mv=new ModelAndView("/system/patient");
 		mv.addObject("basicdata", iPatientService.select(name));
 		return mv;
 	}
 	
-	@RequestMapping("insertOrUpdate")
+	@RequestMapping("insertOrUpdate")          //信息维护---病人信息维护 ---更新病人
 	public ModelAndView all_in_up(Basicdata basic,Contactmode contact,Workdata work, Otherdata other,HttpServletRequest request){
 		ModelAndView mv=new ModelAndView("/system/patient");
 		iBasicdataService.insertOrUpdateSelective(basic);		
@@ -72,15 +72,15 @@ public class PatientController {
 		return mv;
 	}
 	
-	@RequestMapping("todetaile")
+	@RequestMapping("todetaile")               //信息维护---病人信息维护 ---查看病人基本信息
 	public ModelAndView todetaile(int patientID){
-		ModelAndView mv=new ModelAndView("/advice/base");
+		ModelAndView mv=new ModelAndView("/patientmedical/base");
 		mv.addObject("detaile", iPatientService.detaile(patientID));
 		mv.addObject("patientID", patientID);
 		return mv;
 	}
 	
-	@RequestMapping("alltoaddupdate")
+	@RequestMapping("alltoaddupdate")          //信息维护---病人信息维护 ---病人基本信息编辑
 	public ModelAndView alltoaddupdate(int patientID){
 		ModelAndView mv=new ModelAndView("/system/patient_in_up_all");
 		mv.addObject("academic", iMedicalstaffService.academic());
